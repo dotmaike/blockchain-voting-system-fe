@@ -1,17 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Login from './../Login';
+import Dashboard from './../Dashboard';
+import PrivateRoute from './../PrivateRoute';
 
 const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="App-title">Welcome to React</h1>
-    </header>
-    <p className="App-intro">
-      To get started, edit <code>src/components/App/App.js</code> and save to reload.
-    </p>
-  </div>
+  <Router>
+    <div>
+      <Route path="/" component={Login} />
+      <PrivateRoute path="/dashboard" component={Dashboard} />
+    </div>
+  </Router>
 );
 
 export default App;
