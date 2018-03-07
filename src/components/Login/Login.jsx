@@ -1,26 +1,31 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import './styles.scss';
 
 import fakeAuth from './../../Utils/FakeAuth';
 
 class Login extends React.Component {
   state = {
+    email: '',
+    password: '',
     redirectToReferrer: false
   };
 
+  onChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
   login = () => {
-    fakeAuth.authenticate();
-    this.setState({ redirectToReferrer: true });
+    this.setState({ redirectToReferrer: true }, fakeAuth.authenticate());
   };
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/dashboard' } };
     const { redirectToReferrer } = this.state;
 
     if (redirectToReferrer) {
-      return <Redirect to={from} />;
+      return <Redirect to={{ pathname: '/dashboard' }} />;
     }
 
     return (
@@ -34,16 +39,30 @@ class Login extends React.Component {
                 <figure className="avatar">
                   <img alt="" src="https://placehold.it/128x128" />
                 </figure>
-                <form>
+                <section>
                   <div className="field">
                     <div className="control">
-                      <input className="input is-large" type="email" placeholder="Your Email" />
+                      <input
+                        name="email"
+                        className="input is-large"
+                        type="email"
+                        placeholder="Your Email"
+                        onChange={e => this.onChange(e)}
+                        value={this.state.email}
+                      />
                     </div>
                   </div>
 
                   <div className="field">
                     <div className="control">
-                      <input className="input is-large" type="password" placeholder="Your Password" />
+                      <input
+                        name="password"
+                        className="input is-large"
+                        type="password"
+                        placeholder="Your Password"
+                        onChange={e => this.onChange(e)}
+                        value={this.state.password}
+                      />
                     </div>
                   </div>
                   <div className="field">
@@ -55,7 +74,7 @@ class Login extends React.Component {
                   <button className="button is-block is-info is-large is-fullwidth" onClick={this.login}>
                     Login
                   </button>
-                </form>
+                </section>
               </div>
               <p className="has-text-grey">
                 <a href="../">Sign Up</a> &nbsp;·&nbsp;
@@ -69,11 +88,5 @@ class Login extends React.Component {
     );
   }
 }
-
-Login.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.any
-  }).isRequired
-};
 
 export default Login;
