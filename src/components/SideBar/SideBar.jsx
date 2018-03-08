@@ -6,31 +6,27 @@ const SideBar = () => (
     <div>
       <div className="main">
 
-        <NavLink to="/dashboard" className="item" activeClassName="active">
+        <NavLink to="/home" className="item" activeClassName="active">
           <span className="icon">
             <i className="fa fa-home" />
           </span>
           <span className="name">Home</span>
         </NavLink>
 
-        <a href="/" className="item">
+        <NavLink to="/register" className="item" activeClassName="active">
           <span className="icon">
-            <i className="fa fa-star" />
+            <i className="fa fa-edit" />
           </span>
-          <span className="name">Starred</span>
-        </a>
-        <a href="/" className="item">
+          <span className="name">Register</span>
+        </NavLink>
+
+        <NavLink to="/movements" className="item" activeClassName="active">
           <span className="icon">
-            <i className="fa fa-envelope-o" />
+            <i className="fa fa-history" />
           </span>
-          <span className="name">Sent Mail</span>
-        </a>
-        <a href="/" className="item">
-          <span className="icon">
-            <i className="fa fa-folder-o" />
-          </span>
-          <span className="name">Folders</span>
-        </a>
+          <span className="name">Movements</span>
+        </NavLink>
+
       </div>
     </div>
   </aside>
