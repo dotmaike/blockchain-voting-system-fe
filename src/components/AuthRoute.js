@@ -9,7 +9,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
       (fakeAuth.isAuthenticated ? (
         <Component {...props} />
       ) : (
-        <Redirect to={{ pathname: '/login' }} />
+        <Redirect to={{ pathname: '/' }} />
       ))
     }
   />
