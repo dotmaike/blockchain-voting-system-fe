@@ -11,20 +11,16 @@ import Footer from './../Footer';
 const DefaultLayout = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={matchProps =>
-      (fakeAuth.isAuthenticated ? (
-        <Fragment>
-          <Header />
-          <div className="columns">
-            <SideBar />
-            <Component {...matchProps} />
-          </div>
-          <Footer />
-        </Fragment>
-      ) : (
-        <Redirect to={{ pathname: '/' }} />
-      ))
-    }
+    render={matchProps => (
+      <Fragment>
+        <Header />
+        <div className="columns">
+          <SideBar />
+          <Component {...matchProps} />
+        </div>
+        <Footer />
+      </Fragment>
+    )}
   />
 );
 
