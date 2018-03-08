@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './styles.css';
-
-import fakeAuth from './../../Utils/FakeAuth';
 
 import Header from './../Header';
 import SideBar from './../SideBar';
