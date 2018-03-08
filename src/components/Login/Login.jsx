@@ -25,7 +25,7 @@ class Login extends React.Component {
     const { redirectToReferrer } = this.state;
 
     if (redirectToReferrer) {
-      return <Redirect to={{ pathname: '/dashboard' }} />;
+      return <Redirect to={{ pathname: '/home' }} />;
     }
 
     return (
