@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Route } from 'react-router-dom';
-import './styles.css';
+import './styles.scss';
 
 import Header from './../Header';
 import SideBar from './../SideBar';

@@ -1,0 +1,109 @@
+.nav {
+  &.is-dark {
+    background-color: #232B2D;
+    color: #F6F7F7;
+    .nav-item a, a.nav-item {
+      color: #F6F7F7;
+    }
+    .nav-item a.button.is-default {
+      color: #F6F7F7;
+      background-color: transparent;
+      border-width: 2px;
+    }
+  }
+  &.menu {
+    border-bottom: 1px solid #e1e1e1;
+    .nav-item {
+      .icon-btn {
+        border: 3px solid #B7C6C9;
+        border-radius: 90px;
+        padding: 5px 7px;
+        color: #B7C6C9;
+      }
+      &.is-active .icon-btn {
+        color: #2EB398;
+        border: 3px solid #2EB398;
+      }
+      .icon-btn .fa {
+        font-size: 20px;
+        color: #B7C6C9;
+      }
+      &.is-active .icon-btn .fa {
+        color: #2EB398;
+      }
+    }
+  }
+}
+
+.aside {
+  display: block;
+  background-color: #F9F9F9;
+  border-right: 1px solid #DEDEDE;
+}
+
+.messages {
+  display: block;
+  background-color: #fff;
+  border-right: 1px solid #DEDEDE;
+}
+
+.message {
+  display: block;
+  background-color: #fff;
+}
+
+.aside {
+  .compose {
+    height: 95px;
+    margin: 0 -10px;
+    padding: 25px 30px;
+    .button {
+      color: #F6F7F7;
+      .compose {
+        font-size: 14px;
+        font-weight: 700;
+      }
+    }
+  }
+  .main {
+    padding: 40px;
+    color: #6F7B7E;
+  }
+  .title {
+    color: #6F7B7E;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .main {
+    .item {
+      display: block;
+      padding: 10px 0;
+      color: #6F7B7E;
+      &.active {
+        background-color: #F1F1F1;
+        margin: 0 -50px;
+        padding-left: 50px;
+      }
+      &:active, &:hover {
+        background-color: #F2F2F2;
+        margin: 0 -50px;
+        padding-left: 50px;
+      }
+    }
+    .icon {
+      font-size: 19px;
+      padding-right: 30px;
+      color: #A0A0A0;
+    }
+    .name {
+      font-size: 15px;
+      color: #5D5D5D;
+      font-weight: 500;
+    }
+  }
+}
+
+.card.active {
+  background-color: #F5F5F5;
+}
