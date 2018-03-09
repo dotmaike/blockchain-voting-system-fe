@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './styles.scss';
 
 import fakeAuth from './../../Utils/FakeAuth';
@@ -77,8 +77,8 @@ class Login extends React.Component {
                 </section>
               </div>
               <p className="has-text-grey">
-                <a href="../">Sign Up</a> &nbsp;·&nbsp;
-                <a href="../">Forgot Password</a> &nbsp;·&nbsp;
+                <Link to="/signup">Sign Up</Link>&nbsp;·&nbsp;
+                <a href="../">Forgot Password</a>&nbsp;·&nbsp;
                 <a href="../">Need Help?</a>
               </p>
             </div>
