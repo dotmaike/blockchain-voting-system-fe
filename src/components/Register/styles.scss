@@ -1,0 +1,12 @@
+.dropzone {
+  > div {
+    width: 100% !important;
+    > div {
+      margin-top: 50px;
+      text-align: center;
+    }
+  }
+  .fa-3 {
+    font-size: 4em;
+  }
+}
