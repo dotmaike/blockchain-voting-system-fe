@@ -1,20 +1,29 @@
 import React from 'react';
+import './styles.scss';
 
 const Footer = () => (
   <footer className="footer">
-    <div className="container">
-      <div className="content has-text-centered">
-        <p>
-          <strong>Bulma Templates</strong> by <a href="https://github.com/dansup">Daniel Supernault</a>. The source code is
-          licensed
-          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-        </p>
-        <p>
-          <a className="icon" href="https://github.com/dansup/bulma-templates">
-            <i className="fa fa-github" />
-          </a>
-        </p>
-      </div>
+    <div className="icon-container">
+      <p>
+        <a className="icon is-large" href="#email">
+          <i className="fa fa-lg fa-envelope" />
+        </a>
+      </p>
+      <p>
+        <a className="icon is-large" href="#twitter">
+          <i className="fa fa-lg fa-twitter" />
+        </a>
+      </p>
+      <p>
+        <a className="icon is-large" href="#google-plus">
+          <i className="fa fa-lg fa-google-plus" />
+        </a>
+      </p>
+      <p>
+        <a className="icon is-large" href="#facebook">
+          <i className="fa fa-lg fa-facebook-f" />
+        </a>
+      </p>
     </div>
   </footer>
 );
