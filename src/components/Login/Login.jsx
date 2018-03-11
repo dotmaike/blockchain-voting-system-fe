@@ -33,7 +33,7 @@ class Login extends React.Component {
         <div className="hero-body">
           <div className="container has-text-centered">
             <div className="column is-4 is-offset-4">
-              <h3 className="title has-text-grey">Login</h3>
+              <h3 className="title has-text-grey">Asset Tracking</h3>
               <p className="subtitle has-text-grey">Please login to proceed.</p>
               <div className="box">
                 <figure className="avatar">
