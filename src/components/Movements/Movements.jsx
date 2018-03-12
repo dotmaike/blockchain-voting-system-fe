@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.scss';
 
 const Movements = () => (
-  <section className="movement-section">
+  <section className="column is-10 aside hero is-fullheight movement-section">
     <div className="container has-text-centered">
       <h1 className="title">Asset Tracking</h1>
       <div className="movement-form">
