@@ -34,7 +34,6 @@ const SignUp = () => (
       </div>
     </nav>
 
-
     <div className="hero is-fullheight">
       <div className="hero-body">
         <div className="container has-text-centered">
@@ -130,6 +129,9 @@ const SignUp = () => (
                 <div className="control">
                   <div className="select">
                     <select>
+                      <option value="" selected="selected">
+                        Please select business
+                      </option>
                       <option>Automotive</option>
                       <option>Other</option>
                     </select>
