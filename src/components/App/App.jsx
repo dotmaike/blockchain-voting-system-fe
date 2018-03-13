@@ -11,8 +11,8 @@ import Movements from './../Movements';
 const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" render={props => <Login {...props} />} />
-      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/" component={SignUp} />
+      <Route exact path="/login" component={Login} />
       <DefaultLayout exact path="/home" component={Home} />
       <DefaultLayout exact path="/register" component={Register} />
       <DefaultLayout exact path="/movements" component={Movements} />
