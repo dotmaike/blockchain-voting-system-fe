@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.scss';
 
 const Footer = () => (
-  <footer className="footer">
+  <footer className="column is-12 footer">
     <div className="icon-container">
       <p>
         <a className="icon is-large has-text-grey" href="#email">
