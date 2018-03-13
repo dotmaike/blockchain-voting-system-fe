@@ -1,11 +1,9 @@
 .hero {
   background: #f2f6fa;
-}
-
-.hero .nav,
-.hero.is-success .nav {
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  .nav, &.is-success .nav {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
 }
 
 .box {
