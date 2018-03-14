@@ -1,17 +1,20 @@
-export default function API(data) {
-  // Default options are marked with *
-  this.url = 'http://10.22.54.104:8080/asset/tracking/asset/';
-  return fetch(this.url, {
-    body: JSON.stringify(data), // must match 'Content-Type' header
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, same-origin, *omit
-    headers: {
-      'user-agent': 'Mozilla/4.0 MDN Example',
-      'content-type': 'application/json'
-    },
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, cors, *same-origin
-    redirect: 'follow', // *manual, follow, error
-    referrer: 'no-referrer' // *client, no-referrer
-  }).then(response => response.json()); // parses response to JSON
-}
+import base64 from 'base-64';
+
+const API = {
+  baseUrl: 'http://10.22.54.104:8080/asset/tracking/',
+  getUser() {
+    const userUrl = 'users/testUser';
+    const username = 'testUser';
+    const password = 'password';
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `Basic ${base64.encode(`${username}:${password}`)}`);
+    headers.append('Access-Control-Allow-Origin', '*');
+    return fetch(this.baseUrl + userUrl, {
+      headers,
+      method: 'GET'
+    }).then(res => res.json());
+  }
+};
+
+export default API;
