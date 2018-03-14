@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import logo from './blockchain.png';
 import './styles.scss';
 
 import fakeAuth from './../../Utils/FakeAuth';
@@ -37,7 +38,7 @@ class Login extends React.Component {
               <p className="subtitle has-text-grey">Please login to proceed.</p>
               <div className="box">
                 <figure className="avatar">
-                  <img alt="" src="https://placehold.it/128x128" />
+                  <img src={logo} alt="logo" />
                 </figure>
                 <section>
                   <div className="field">

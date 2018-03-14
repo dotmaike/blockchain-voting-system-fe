@@ -5,14 +5,9 @@ const Header = () => (
   <nav className="navbar has-shadow">
     <div className="container">
       <div className="navbar-brand">
-        <a className="navbar-item" href="https://bulma.io">
+        <a className="navbar-item" href="/home">
           <p>Welcome !</p>
         </a>
-        <div className="navbar-burger burger" data-target="navbarExampleTransparentExample">
-          <span />
-          <span />
-          <span />
-        </div>
       </div>
 
       <div id="navbarExampleTransparentExample" className="navbar-menu">
