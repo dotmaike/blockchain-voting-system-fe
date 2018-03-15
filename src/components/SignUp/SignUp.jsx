@@ -6,28 +6,30 @@ import Footer from './../Footer';
 
 const SignUp = () => (
   <section>
-    <nav className="navbar is-info">
-      <div className="navbar-brand">
-        <p className="navbar-item title">Asset Tracking</p>
-        <div className="navbar-burger burger" data-target="navbarExampleTransparentExample">
-          <span />
-          <span />
-          <span />
+    <nav className="navbar has-shadow">
+      <div className="container custom-navbar-heigh">
+        <div className="navbar-brand">
+          <p className="navbar-item title sign-up-title">Asset Tracking</p>
+          <div className="navbar-burger burger" data-target="navbarExampleTransparentExample">
+            <span />
+            <span />
+            <span />
+          </div>
         </div>
-      </div>
 
-      <div className="navbar-menu">
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="field is-grouped">
-              <p className="control">
-                <Link to="/login" className="button is-primary">
-                  <span className="icon">
-                    <i className="fa fa-sign-in" aria-hidden="true" />
-                  </span>
-                  <span>Access</span>
-                </Link>
-              </p>
+        <div className="navbar-menu">
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="field is-grouped">
+                <p className="control">
+                  <Link to="/login" className="button is-primary">
+                    <span className="icon">
+                      <i className="fa fa-sign-in" aria-hidden="true" />
+                    </span>
+                    <span>Access</span>
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>
