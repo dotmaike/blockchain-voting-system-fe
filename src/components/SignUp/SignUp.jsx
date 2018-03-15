@@ -452,10 +452,10 @@ const SignUp = () => (
 
               <div className="field is-grouped">
                 <div className="control">
-                  <button className="button is-link">Submit</button>
+                  <button className="button is-primary">Submit</button>
                 </div>
                 <div className="control">
-                  <button className="button is-text">Cancel</button>
+                  <button className="button is-ligth">Cancel</button>
                 </div>
               </div>
             </div>
