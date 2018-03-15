@@ -444,7 +444,7 @@ const SignUp = () => (
                   <label htmlFor="#" className="checkbox">
                     <input type="checkbox" />
                     <span>
-                      &emsp; I agree to the <a href="/">terms and conditions</a>
+                      &emsp; I agree to the <a href="#terms">terms and conditions</a>
                     </span>
                   </label>
                 </div>
