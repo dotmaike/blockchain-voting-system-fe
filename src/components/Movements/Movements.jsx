@@ -11,7 +11,7 @@ const Movements = () => (
             <input className="input" type="text" placeholder="Find Assets" />
           </div>
           <div className="control">
-            <button className="button is-info">
+            <button className="button is-primary">
               Search
             </button>
           </div>
