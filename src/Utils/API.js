@@ -15,6 +15,11 @@ const API = {
       headers,
       method: 'GET'
     }).then(res => res.json());
+  },
+  getCountries() {
+    return fetch('https://restcountries.eu/rest/v2/all', {
+      method: 'GET'
+    }).then(res => res.json());
   }
 };
 
