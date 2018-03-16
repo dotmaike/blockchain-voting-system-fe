@@ -4,6 +4,11 @@
   text-align: initial;
 }
 
+.cover {
+  height: 100vh !important;
+  object-fit: cover;
+}
+
 .custom-navbar-heigh{
   height: 52px;
 }
