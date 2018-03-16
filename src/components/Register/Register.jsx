@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import Dropzone from 'react-dropzone';
 import './styles.scss';
 
-class Register extends Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,7 +67,7 @@ class Register extends Component {
 
   render() {
     return (
-      <Fragment>
+      <React.Fragment>
         <form className="column is-10" onSubmit={this.handleSubmit}>
           <div className="columns">
             <div className="column is-10 messages is-fullheight">
@@ -187,7 +187,7 @@ class Register extends Component {
             </p>
           </div>
         </form>
-      </Fragment>
+      </React.Fragment>
     );
   }
 }
