@@ -10,7 +10,7 @@ const SignUp = () => (
       <div className="container custom-navbar-heigh">
         <div className="navbar-brand">
           <p className="navbar-item title sign-up-title">Asset Tracking</p>
-          <div className="navbar-burger burger" data-target="navbarExampleTransparentExample">
+          <div className="navbar-burger burger" data-target="navbar">
             <span />
             <span />
             <span />
