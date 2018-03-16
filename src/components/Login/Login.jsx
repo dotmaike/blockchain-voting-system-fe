@@ -47,7 +47,7 @@ class Login extends React.Component {
                         name="email"
                         className="input is-large"
                         type="email"
-                        placeholder="Your Email"
+                        placeholder="User Name"
                         onChange={e => this.onChange(e)}
                         value={this.state.email}
                       />
