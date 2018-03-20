@@ -145,7 +145,9 @@ class Register extends React.Component {
                     <div className="dropzone">
                       <Dropzone multiple onDrop={this.dropFiles}>
                         <div>
-                          <p>Drop files here...</p>
+                          <p>
+                            <i className="fa fa-upload" /> Drop files here...
+                          </p>
                           <i className="fa fa-file fa-3" aria-hidden="true" />
                         </div>
                       </Dropzone>
@@ -159,7 +161,10 @@ class Register extends React.Component {
             <div className="column is-2 messages is-fullheight">
               <div className="content">
                 <div className="field">
-                  <img src="https://placehold.it/288x288" alt="" />
+                  <img
+                    src={this.state.images.length ? this.state.images[0].preview : 'https://placehold.it/288x288?text=Image'}
+                    alt=""
+                  />
                 </div>
 
                 <div className="field">
@@ -168,7 +173,9 @@ class Register extends React.Component {
                       <Dropzone multiple onDrop={this.dropImage} accept="image/*" disabled={this.state.disabled}>
                         <div>
                           <i className="fa fa-file-image-o fa-3" aria-hidden="true" />
-                          <p>Upload Image</p>
+                          <p>
+                            <i className="fa fa-upload" /> Upload Image
+                          </p>
                         </div>
                       </Dropzone>
                     </div>
