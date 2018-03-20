@@ -1,0 +1,13 @@
+.snackbar {
+  bottom: 5px;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, 21px);
+  transition: transform .25s cubic-bezier(.4, 0, 1, 1);
+
+  &.active {
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+    transition: transform .25s cubic-bezier(0, 0, .2, 1);
+  }
+}
