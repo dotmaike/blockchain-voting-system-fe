@@ -152,7 +152,7 @@ class SignUp extends React.Component {
                       Type of business
                     </label>
                     <div className="control">
-                      <Select countries={this.state.business} defalutValue="" defaultOption="Please select business" />
+                      <Select countries={this.state.business} defaultValue="" defaultOption="Please select business" />
                     </div>
                   </div>
 
@@ -207,7 +207,7 @@ class SignUp extends React.Component {
                     </label>
                     <div className="control">
                       {this.state.countries.length && (
-                        <Select countries={this.state.countries} defalutValue="" defaultOption="Please select a country" />
+                        <Select countries={this.state.countries} defaultValue="" defaultOption="Please select a country" />
                       )}
                     </div>
                   </div>
