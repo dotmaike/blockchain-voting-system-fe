@@ -4,7 +4,7 @@ import './styles.scss';
 
 import Footer from './../Footer';
 import Select from './../Select';
-import API from './../../Utils/API';
+import { getCountries } from './../../Utils/API';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class SignUp extends React.Component {
     };
   }
   componentWillMount() {
-    API.getCountries()
+    getCountries()
       .then(data => this.setState({ countries: data }))
       .catch(error => console.error(error));
   }

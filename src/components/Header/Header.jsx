@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import API from './../../Utils/API';
+import { getUser } from './../../Utils/API';
 
 class Header extends React.Component {
   constructor() {
@@ -9,11 +10,24 @@ class Header extends React.Component {
     this.state = { userData: {} };
   }
   componentWillMount() {
-    API.getUser()
-      .then(data => this.setState({ userData: data }))
-      .catch(error => console.error(error));
+    const isAuthenticated = Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length > 0;
+    if (isAuthenticated) {
+      getUser('testUser', 'password')
+        .then(res => this.setState({ userData: res.data }))
+        .catch(error => console.error(error));
+    }
   }
+  onLogout = (e) => {
+    e.preventDefault();
+    sessionStorage.clear();
+  };
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { redirectToReferrer } = this.state;
+
+    if (redirectToReferrer) {
+      return <Redirect to={from} />;
+    }
     return (
       <nav className="navbar has-shadow">
         <div className="container">
@@ -39,12 +53,12 @@ class Header extends React.Component {
                 <span className="name">Username</span>
               </a>
 
-              <Link to="/login" className="navbar-item">
+              <a href="/login" className="navbar-item" onClick={this.onLogout}>
                 <span className="icon">
                   <i className="fa fa-sign-out" />
                 </span>
                 <span className="name">Logout</span>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -53,4 +67,8 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+Header.propTypes = {
+  location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
+
+export default withRouter(Header);
