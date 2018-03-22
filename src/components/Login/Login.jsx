@@ -3,11 +3,11 @@ import { Link, Redirect } from 'react-router-dom';
 import logo from './blockchain.png';
 import './styles.scss';
 
-import fakeAuth from './../../Utils/FakeAuth';
+import { getUser } from './../../Utils/API';
 
 class Login extends React.Component {
   state = {
-    email: '',
+    username: '',
     password: '',
     redirectToReferrer: false
   };
@@ -19,7 +19,12 @@ class Login extends React.Component {
   };
 
   login = () => {
-    this.setState({ redirectToReferrer: true }, fakeAuth.authenticate());
+    getUser(this.state.username, this.state.password)
+      .then((res) => {
+        sessionStorage.setItem('userInfo', JSON.stringify(res.data));
+        this.setState({ redirectToReferrer: true });
+      })
+      .catch(error => console.error(error));
   };
 
   render() {
@@ -44,12 +49,12 @@ class Login extends React.Component {
                   <div className="field">
                     <div className="control">
                       <input
-                        name="email"
+                        name="username"
                         className="input is-large"
-                        type="email"
+                        type="text"
                         placeholder="User Name"
                         onChange={e => this.onChange(e)}
-                        value={this.state.email}
+                        value={this.state.username}
                       />
                     </div>
                   </div>

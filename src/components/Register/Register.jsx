@@ -1,17 +1,15 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
 import './styles.scss';
+
+import { setAsset } from './../../Utils/API';
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      serialNumber: '',
-      assetType: '',
-      assetSummary: '',
-      productDesc: '',
-      files: [],
-      images: [],
+      form: {
+        ownerName: 'testUser'
+      },
       disabled: false
     };
   }
@@ -52,29 +50,33 @@ class Register extends React.Component {
         </ul>
       </div>
     );
-  handleSubmit = (event) => {
-    console.log(this.state);
-    event.preventDefault();
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const data = this.state.form;
+    const formData = new FormData();
+    Object.keys(data).forEach((item) => {
+      formData.append(item, data[item]);
+    });
+    setAsset(formData).then((res) => {
+      console.log(res.data);
+    });
   };
   handleChange = (event) => {
     const { target } = event;
-    const { name, value } = target;
-
-    this.setState({
-      [name]: value
-    });
+    const { name, value, files } = target;
+    this.setState(state => ({ form: { ...state.form, ...{ [name]: name === 'file' ? files.item(0) : value } } }));
   };
 
   render() {
     return (
       <React.Fragment>
-        <form className="column is-10" onSubmit={this.handleSubmit}>
+        <form id="asset-form" className="column is-10" onSubmit={this.handleSubmit}>
           <div className="columns">
             <div className="column is-10 messages is-fullheight">
               <div className="content">
                 <div className="field">
                   <label className="label" htmlFor="serial-number">
-                    ID
+                    Serial Number
                   </label>
                   <div className="control">
                     <input
@@ -82,8 +84,7 @@ class Register extends React.Component {
                       name="serialNumber"
                       id="serial-number"
                       type="text"
-                      placeholder="ID"
-                      value={this.state.serialNumber}
+                      placeholder="Serial Number"
                       onChange={this.handleChange}
                     />
                   </div>
@@ -100,7 +101,6 @@ class Register extends React.Component {
                       id="asset-type"
                       type="text"
                       placeholder="Asset Type"
-                      value={this.state.assetType}
                       onChange={this.handleChange}
                     />
                   </div>
@@ -113,12 +113,11 @@ class Register extends React.Component {
                   <div className="control">
                     <input
                       className="input"
-                      name="assetSummary"
+                      name="summary"
                       id="asset-summary"
                       type="text"
                       placeholder="Asset Summary"
                       maxLength="150"
-                      value={this.state.assetSummary}
                       onChange={this.handleChange}
                     />
                   </div>
@@ -131,10 +130,9 @@ class Register extends React.Component {
                   <div className="control">
                     <textarea
                       className="textarea"
-                      name="productDesc"
+                      name="description"
                       id="product-desc"
                       placeholder="Product Description"
-                      value={this.state.productDesc}
                       onChange={this.handleChange}
                     />
                   </div>
@@ -142,17 +140,25 @@ class Register extends React.Component {
 
                 <div className="field">
                   <section>
-                    <div className="dropzone">
-                      <Dropzone multiple onDrop={this.dropFiles}>
-                        <div>
-                          <p>
-                            <i className="fa fa-upload" /> Drop files here...
-                          </p>
-                          <i className="fa fa-file fa-3" aria-hidden="true" />
-                        </div>
-                      </Dropzone>
+                    <div className="file has-name is-boxed">
+                      <label className="file-label" htmlFor="resume">
+                        <input
+                          className="file-input"
+                          name="resume"
+                          id="resume"
+                          type="file"
+                          multiple
+                          onChange={this.handleChange}
+                        />
+                        <span className="file-cta">
+                          <span className="file-icon">
+                            <i className="fa fa-upload" />
+                          </span>
+                          <span className="file-label">Choose a file…</span>
+                        </span>
+                        <span className="file-name">Screen Shot 2017-07-29 at 15.54.25.png</span>
+                      </label>
                     </div>
-                    {this.showFiles()}
                   </section>
                 </div>
               </div>
@@ -160,26 +166,36 @@ class Register extends React.Component {
 
             <div className="column is-2 messages is-fullheight">
               <div className="content">
-                <div className="field">
-                  <img
-                    src={this.state.images.length ? this.state.images[0].preview : 'https://placehold.it/288x288?text=Image'}
-                    alt=""
-                  />
+                <div className="field is-centered">
+                  {this.state.file ? (
+                    <img src={this.state.file} alt="" />
+                  ) : (
+                    <i className="fa fa-file-image-o fa-5" aria-hidden="true" />
+                  )}
                 </div>
 
                 <div className="field">
                   <section>
-                    <div className="dropzone">
-                      <Dropzone multiple onDrop={this.dropImage} accept="image/*" disabled={this.state.disabled}>
-                        <div>
-                          <i className="fa fa-file-image-o fa-3" aria-hidden="true" />
-                          <p>
-                            <i className="fa fa-upload" /> Upload Image
-                          </p>
-                        </div>
-                      </Dropzone>
+                    <div className="file has-name is-boxed">
+                      <label className="file-label" htmlFor="file">
+                        <input
+                          className="file-input"
+                          type="file"
+                          id="file"
+                          name="file"
+                          accept="image/*"
+                          disabled={this.state.disabled}
+                          onChange={this.handleChange}
+                        />
+                        <span className="file-cta">
+                          <span className="file-icon">
+                            <i className="fa fa-upload" />
+                          </span>
+                          <span className="file-label">Choose a image…</span>
+                        </span>
+                        <span className="file-name">Screen Shot 2017-07-29 at 15.54.25.png</span>
+                      </label>
                     </div>
-                    {this.showImages()}
                   </section>
                 </div>
               </div>
