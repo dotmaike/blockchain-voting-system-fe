@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './styles.scss';
+
+import { isAuthenticated } from './../../Utils/API';
 
 import Header from './../Header';
 import SideBar from './../SideBar';
@@ -11,7 +13,7 @@ const DefaultLayout = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      (sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length ? (
+      (isAuthenticated ? (
         <Fragment>
           <Header />
           <div className="columns">
@@ -37,4 +39,4 @@ DefaultLayout.propTypes = {
   component: PropTypes.any.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
-export default DefaultLayout;
+export default withRouter(DefaultLayout);

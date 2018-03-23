@@ -57,9 +57,13 @@ class Register extends React.Component {
     Object.keys(data).forEach((item) => {
       formData.append(item, data[item]);
     });
-    setAsset(formData).then((res) => {
-      console.log(res.data);
-    });
+    setAsset(formData)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   handleChange = (event) => {
     const { target } = event;
