@@ -4,6 +4,9 @@ const baseUrl = 'http://10.22.54.104:8080/asset/tracking';
 const userUrl = '/users/';
 const assetUrl = '/asset/';
 
+export const isAuthenticated =
+  sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length > 0;
+
 const API = axios.create({
   baseURL: baseUrl
 });
@@ -24,6 +27,9 @@ export function getUser(username, password) {
 }
 
 export function setAsset(data) {
+  if (!isAuthenticated) {
+    return Promise.reject(new Error('reject'));
+  }
   return API({
     method: 'post',
     url: assetUrl,

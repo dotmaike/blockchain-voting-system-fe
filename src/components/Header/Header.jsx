@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { getUser } from './../../Utils/API';
+import { getUser, isAuthenticated } from './../../Utils/API';
 
 class Header extends React.Component {
   constructor() {
@@ -10,7 +10,6 @@ class Header extends React.Component {
     this.state = { userData: {} };
   }
   componentWillMount() {
-    const isAuthenticated = Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length > 0;
     if (isAuthenticated) {
       getUser('testUser', 'password')
         .then(res => this.setState({ userData: res.data }))
@@ -68,7 +67,7 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  location: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
 export default withRouter(Header);
