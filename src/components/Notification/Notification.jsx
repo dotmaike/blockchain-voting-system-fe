@@ -17,7 +17,7 @@ class Notification extends React.Component {
       <React.Fragment>
         <div className={`columns snackbar ${this.state.isActive ? 'active' : ''}`}>
           <div className="column">
-            <div className="notification is-success">{this.props.message}</div>
+            <div className={`notification ${this.props.isSuccess ? 'is-success' : 'is-danger'}`}>{this.props.message}</div>
           </div>
         </div>
       </React.Fragment>
@@ -27,7 +27,8 @@ class Notification extends React.Component {
 
 Notification.propTypes = {
   isActive: PropTypes.bool.isRequired,
-  message: PropTypes.string.isRequired
+  message: PropTypes.string.isRequired,
+  isSuccess: PropTypes.bool.isRequired
 };
 
 export default Notification;
