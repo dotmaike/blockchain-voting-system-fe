@@ -2,37 +2,35 @@ import React from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { getUser, isAuthenticated } from './../../Utils/API';
-
 class Header extends React.Component {
   constructor() {
     super();
-    this.state = { userData: {} };
-  }
-  componentWillMount() {
-    if (isAuthenticated) {
-      getUser('testUser', 'password')
-        .then(res => this.setState({ userData: res.data }))
-        .catch(error => console.error(error));
-    }
+    this.state = {
+      userInfo:
+        sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length
+          ? JSON.parse(sessionStorage.getItem('userInfo'))
+          : {}
+    };
   }
   onLogout = (e) => {
     e.preventDefault();
     sessionStorage.clear();
+    this.props.history.push('/login');
   };
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const { redirectToReferrer } = this.state;
-
-    if (redirectToReferrer) {
-      return <Redirect to={from} />;
+    if (!sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length) {
+      return <Redirect to={{ pathname: '/login' }} />;
     }
     return (
       <nav className="navbar has-shadow">
         <div className="container">
           <div className="navbar-brand">
             <a className="navbar-item" href="/home">
-              <p>{Object.keys(this.state.userData).length > 0 && `Welcome ${this.state.userData.username} !`}</p>
+              <p>
+                {sessionStorage.getItem('userInfo') &&
+                  Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length &&
+                  `Welcome ${this.state.userInfo.username} !`}
+              </p>
             </a>
           </div>
 
@@ -49,7 +47,11 @@ class Header extends React.Component {
                 <span className="icon">
                   <i className="fa fa-user-circle" />
                 </span>
-                <span className="name">Username</span>
+                <span className="name">
+                  {sessionStorage.getItem('userInfo') &&
+                    Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length &&
+                    this.state.userInfo.username}
+                </span>
               </a>
 
               <a href="/login" className="navbar-item" onClick={this.onLogout}>
@@ -67,7 +69,7 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  location: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
+  history: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
 export default withRouter(Header);

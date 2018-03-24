@@ -3,15 +3,27 @@ import './styles.scss';
 
 import { setAsset } from './../../Utils/API';
 
+import Notification from './../Notification';
+
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       form: {
-        ownerName: 'testUser'
+        ownerName:
+          sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length
+            ? JSON.parse(sessionStorage.getItem('userInfo')).username
+            : ''
       },
-      disabled: false
+      disabled: false,
+      isActive: false,
+      isSuccess: false,
+      message: '',
+      assetInfo: ''
     };
+  }
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
   dropFiles = (file) => {
     const files = this.state.files.concat(file);
@@ -59,16 +71,28 @@ class Register extends React.Component {
     });
     setAsset(formData)
       .then((res) => {
-        console.log(res.data);
+        window.scrollTo(0, 0);
+        this.setState({
+          isActive: true,
+          isSuccess: true,
+          message: 'Asset was successfully added',
+          assetInfo: res.data
+        });
+        setTimeout(this.toogleActive, 5000);
       })
       .catch((error) => {
-        console.log(error);
+        window.scrollTo(0, 0);
+        this.setState({ isActive: true, message: error.response.data.message });
+        setTimeout(this.toogleActive, 5000);
       });
   };
   handleChange = (event) => {
     const { target } = event;
     const { name, value, files } = target;
     this.setState(state => ({ form: { ...state.form, ...{ [name]: name === 'file' ? files.item(0) : value } } }));
+  };
+  toogleActive = () => {
+    this.setState({ isActive: false });
   };
 
   render() {
@@ -213,7 +237,18 @@ class Register extends React.Component {
               <button className="button is-light">Cancel</button>
             </p>
           </div>
+          <div className="column is-10 card">
+            <div className="card-content">
+              <div className="content"><pre>{JSON.stringify(this.state.assetInfo)}</pre></div>
+            </div>
+          </div>
         </form>
+        <Notification
+          isActive={this.state.isActive}
+          message={this.state.message}
+          isSuccess={this.state.isSuccess}
+          toogleActive={this.toogleActive}
+        />
       </React.Fragment>
     );
   }

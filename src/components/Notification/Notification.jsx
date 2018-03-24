@@ -2,33 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.scss';
 
-class Notification extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isActive: props.isActive };
-  }
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ isActive: false });
-    }, 2000);
-  }
-  render() {
-    return (
-      <React.Fragment>
-        <div className={`columns snackbar ${this.state.isActive ? 'active' : ''}`}>
-          <div className="column">
-            <div className={`notification ${this.props.isSuccess ? 'is-success' : 'is-danger'}`}>{this.props.message}</div>
+const Notification = (props) => {
+  const close = () => {
+    props.toogleActive();
+  };
+  return (
+    <React.Fragment>
+      <div className={`columns snackbar ${props.isActive ? 'active' : ''}`}>
+        <div className="column">
+          <div className={`notification ${props.isSuccess ? 'is-success' : 'is-danger'}`}>
+            <button className="delete" onClick={close} />
+            {props.message}
           </div>
         </div>
-      </React.Fragment>
-    );
-  }
-}
+      </div>
+    </React.Fragment>
+  );
+};
 
 Notification.propTypes = {
   isActive: PropTypes.bool.isRequired,
   message: PropTypes.string.isRequired,
-  isSuccess: PropTypes.bool.isRequired
+  isSuccess: PropTypes.bool.isRequired,
+  toogleActive: PropTypes.func.isRequired
 };
 
 export default Notification;

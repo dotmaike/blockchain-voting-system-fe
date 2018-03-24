@@ -1,16 +1,22 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import logo from './blockchain.png';
 import './styles.scss';
 
 import { getUser } from './../../Utils/API';
 
 class Login extends React.Component {
-  state = {
-    username: '',
-    password: '',
-    redirectToReferrer: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+      isAuthenticated:
+        sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length,
+      error: false
+    };
+  }
 
   onChange = (e) => {
     this.setState({
@@ -19,19 +25,28 @@ class Login extends React.Component {
   };
 
   login = () => {
+    const { history } = this.props;
     getUser(this.state.username, this.state.password)
       .then((res) => {
         sessionStorage.setItem('userInfo', JSON.stringify(res.data));
-        this.setState({ redirectToReferrer: true });
+        history.push('/home');
       })
-      .catch(error => console.error(error));
+      .catch((error) => {
+        if (error.response.status === 401) {
+          this.setState({ error: true });
+          setTimeout(() => {
+            this.setState({ error: false });
+          }, 5000);
+        } else {
+          console.error(error);
+        }
+      });
   };
 
   render() {
-    const { redirectToReferrer } = this.state;
-
-    if (redirectToReferrer) {
-      return <Redirect to={{ pathname: '/home' }} />;
+    const { from } = this.props.location.state || { from: { pathname: this.state.isAuthenticated ? '/home' : '/' } };
+    if (this.state.isAuthenticated) {
+      return <Redirect to={from} />;
     }
 
     return (
@@ -46,6 +61,7 @@ class Login extends React.Component {
                   <img src={logo} alt="logo" />
                 </figure>
                 <section>
+                  {this.state.error && <p className="help is-danger">The username or password are not valid</p>}
                   <div className="field">
                     <div className="control">
                       <input
@@ -95,4 +111,9 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  history: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
+};
+
+export default withRouter(Login);

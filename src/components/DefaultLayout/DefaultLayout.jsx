@@ -3,8 +3,6 @@ import { Route, Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './styles.scss';
 
-import { isAuthenticated } from './../../Utils/API';
-
 import Header from './../Header';
 import SideBar from './../SideBar';
 import Footer from './../Footer';
@@ -13,7 +11,7 @@ const DefaultLayout = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      (isAuthenticated ? (
+      (sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length ? (
         <Fragment>
           <Header />
           <div className="columns">
