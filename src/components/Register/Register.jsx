@@ -165,30 +165,6 @@ class Register extends React.Component {
                     />
                   </div>
                 </div>
-
-                <div className="field">
-                  <section>
-                    <div className="file has-name is-boxed">
-                      <label className="file-label" htmlFor="resume">
-                        <input
-                          className="file-input"
-                          name="resume"
-                          id="resume"
-                          type="file"
-                          multiple
-                          onChange={this.handleChange}
-                        />
-                        <span className="file-cta">
-                          <span className="file-icon">
-                            <i className="fa fa-upload" />
-                          </span>
-                          <span className="file-label">Choose a file…</span>
-                        </span>
-                        <span className="file-name">Screen Shot 2017-07-29 at 15.54.25.png</span>
-                      </label>
-                    </div>
-                  </section>
-                </div>
               </div>
             </div>
 
