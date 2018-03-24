@@ -4,11 +4,15 @@ const baseUrl = 'http://10.22.54.104:8080/asset/tracking';
 const userUrl = '/users/';
 const assetUrl = '/asset/';
 
-export const isAuthenticated =
-  sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length > 0;
+export function isAuthenticated() {
+  return (
+    (sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length > 0) || false
+  );
+}
 
 const API = axios.create({
-  baseURL: baseUrl
+  baseURL: baseUrl,
+  headers: { 'Cache-Control': 'no-cache' }
 });
 
 export function getCountries() {
