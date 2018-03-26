@@ -59,6 +59,7 @@ class Register extends React.Component {
           assetInfo: res.data
         });
         setTimeout(this.toogleActive, 5000);
+        document.getElementById('asset-form').reset();
       })
       .catch((error) => {
         window.scrollTo(0, 0);
