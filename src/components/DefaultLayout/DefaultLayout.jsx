@@ -6,6 +6,9 @@ import './styles.scss';
 import Header from './../Header';
 import SideBar from './../SideBar';
 import Footer from './../Footer';
+import Notification from './../Notification';
+
+const isActive = false;
 
 const DefaultLayout = ({ component: Component, ...rest }) => (
   <Route
@@ -18,6 +21,7 @@ const DefaultLayout = ({ component: Component, ...rest }) => (
             <SideBar />
             <Component {...props} />
           </div>
+          {isActive && <Notification isActive message="" isSuccess toogleActive={() => {}} />}
           <Footer />
         </Fragment>
       ) : (
