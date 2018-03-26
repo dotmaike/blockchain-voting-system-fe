@@ -1,8 +1,8 @@
 import React from 'react';
+import Dropzone from 'react-dropzone';
 import './styles.scss';
 
 import { setAsset } from './../../Utils/API';
-
 import Notification from './../Notification';
 
 class Register extends React.Component {
@@ -19,7 +19,8 @@ class Register extends React.Component {
       isActive: false,
       isSuccess: false,
       message: '',
-      assetInfo: ''
+      assetInfo: '',
+      files: []
     };
   }
   componentDidMount() {
@@ -27,29 +28,8 @@ class Register extends React.Component {
   }
   dropFiles = (file) => {
     const files = this.state.files.concat(file);
-    this.setState({
-      files
-    });
+    this.setState(state => ({ form: { ...state.form, ...{ file: file[0] } }, files }));
   };
-  dropImage = (image) => {
-    const images = this.state.images.concat(image);
-    this.setState({
-      images,
-      disabled: true
-    });
-  };
-  showImages = () =>
-    this.state.images && (
-      <div>
-        <ul>
-          {this.state.images.map(img => (
-            <li key={Math.random()}>
-              <div>{`${img.name} : ${img.size} bytes.`}</div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
   showFiles = () =>
     this.state.files && (
       <div>
@@ -88,8 +68,8 @@ class Register extends React.Component {
   };
   handleChange = (event) => {
     const { target } = event;
-    const { name, value, files } = target;
-    this.setState(state => ({ form: { ...state.form, ...{ [name]: name === 'file' ? files.item(0) : value } } }));
+    const { name, value } = target;
+    this.setState(state => ({ form: { ...state.form, ...{ [name]: value } } }));
   };
   toogleActive = () => {
     this.setState({ isActive: false });
@@ -166,56 +146,56 @@ class Register extends React.Component {
                   </div>
                 </div>
               </div>
+              <div className="field is-grouped">
+                <p className="control">
+                  <input type="submit" className="button is-primary" value="Submit" />
+                </p>
+                <p className="control">
+                  <button className="button is-light">Cancel</button>
+                </p>
+              </div>
+              {this.state.isSuccess && (
+                <div className="card">
+                  <div className="card-content">
+                    <div className="content">
+                      <pre>ID: {this.state.assetInfo.uuid}</pre>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="column is-2 messages is-fullheight">
               <div className="content">
                 <div className="field is-centered">
-                  {this.state.file ? (
-                    <img src={this.state.file} alt="" />
-                  ) : (
-                    <i className="fa fa-file-image-o fa-5" aria-hidden="true" />
-                  )}
+                  <img
+                    src={this.state.files.length ? this.state.files[0].preview : 'https://placehold.it/288x288?text=Preview'}
+                    alt=""
+                  />
                 </div>
 
                 <div className="field">
                   <section>
-                    <div className="file has-name is-boxed">
-                      <label className="file-label" htmlFor="file">
-                        <input
-                          className="file-input"
-                          type="file"
-                          id="file"
-                          name="file"
-                          accept="image/*"
-                          disabled={this.state.disabled}
-                          onChange={this.handleChange}
-                        />
-                        <span className="file-cta">
-                          <span className="file-icon">
-                            <i className="fa fa-upload" />
-                          </span>
-                          <span className="file-label">Choose a image…</span>
-                        </span>
-                        <span className="file-name">Screen Shot 2017-07-29 at 15.54.25.png</span>
-                      </label>
+                    <div className="dropzone">
+                      <Dropzone
+                        id="file"
+                        name="file"
+                        accept="image/*"
+                        disabled={this.state.disabled}
+                        onDrop={this.dropFiles}
+                      >
+                        <div>
+                          <p>
+                            <i className="fa fa-upload" /> Choose a image...
+                          </p>
+                          <i className="fa fa-file-image-o fa-3" aria-hidden="true" />
+                        </div>
+                      </Dropzone>
                     </div>
+                    {this.showFiles()}
                   </section>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="field is-grouped">
-            <p className="control">
-              <input type="submit" className="button is-primary" value="Submit" />
-            </p>
-            <p className="control">
-              <button className="button is-light">Cancel</button>
-            </p>
-          </div>
-          <div className="column is-10 card">
-            <div className="card-content">
-              <div className="content"><pre>{JSON.stringify(this.state.assetInfo)}</pre></div>
             </div>
           </div>
         </form>
