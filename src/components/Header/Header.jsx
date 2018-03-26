@@ -26,11 +26,7 @@ class Header extends React.Component {
         <div className="container">
           <div className="navbar-brand">
             <a className="navbar-item" href="/home">
-              <p>
-                {sessionStorage.getItem('userInfo') &&
-                  Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length &&
-                  `Welcome ${this.state.userInfo.username} !`}
-              </p>
+              <p>Asset Tracking</p>
             </a>
           </div>
 
