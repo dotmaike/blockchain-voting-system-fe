@@ -8,12 +8,10 @@ const Notification = (props) => {
   };
   return (
     <React.Fragment>
-      <div className={`columns snackbar ${props.isActive ? 'active' : ''}`}>
-        <div className="column">
-          <div className={`notification ${props.isSuccess ? 'is-success' : 'is-danger'}`}>
-            <button className="delete" onClick={close} />
-            {props.message}
-          </div>
+      <div id="snackbar" className={`snackbar${props.isActive ? ' active' : ''}`}>
+        <div className={`notification ${props.isSuccess ? 'is-success' : 'is-danger'}`}>
+          <button className="delete" onClick={close} />
+          {props.message}
         </div>
       </div>
     </React.Fragment>

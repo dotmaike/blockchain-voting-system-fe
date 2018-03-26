@@ -1,6 +1,7 @@
 .snackbar {
   bottom: 0;
   left: 50%;
+  margin-bottom: 5px;
   position: fixed;
   transform: translate(-50%, 21px);
   transition: transform .25s cubic-bezier(.4, 0, 1, 1);

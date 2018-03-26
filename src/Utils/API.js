@@ -30,6 +30,13 @@ export function getUser(username, password) {
   }).then(res => res);
 }
 
+export function getAsset(assetId) {
+  return API({
+    method: 'get',
+    url: assetUrl + assetId
+  }).then(res => res);
+}
+
 export function setAsset(data) {
   if (!isAuthenticated) {
     return Promise.reject(new Error('reject'));
