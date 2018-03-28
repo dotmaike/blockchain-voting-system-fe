@@ -13,3 +13,23 @@
 .icon-position:hover{
   cursor: pointer;
 }
+
+.event-panel {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+}
+
+.add-button {
+  background: none;
+  border: none;
+}
+
+.add-button:hover {
+  cursor: pointer;
+}
+
+.list-title {
+  align-self: flex-end;
+  font-weight: bold;
+}
