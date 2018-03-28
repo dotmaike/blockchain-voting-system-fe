@@ -10,7 +10,7 @@ class Transactions extends React.Component {
     const eventSummaries = this.props.data.events.map(event => event.summary);
 
     return (
-      <section className="hero is-white sub-container">
+      <section className="hero is-white sub-container has-text-centered">
         <div className="hero-head">
           <h1 className="title is-size-4">Transactions</h1>
           <div className="columns">
@@ -22,7 +22,7 @@ class Transactions extends React.Component {
         <div className="hero-body">
           <div className="container">
             <div className="columns">
-              <div className="column is-one-third">
+              <div className="column is-one-quarter">
                 <div className="title is-size-5">Asset tracking history</div>
                 <div>
                   <figure className="image is-square">
@@ -30,10 +30,10 @@ class Transactions extends React.Component {
                   </figure>
                 </div>
               </div>
-              <div className="column">
+              <div className="column is-three-fifths">
                 <div className="field is-horizontal">
                   <div className="field-label is-normal">
-                    <label className="label" htmlFor="asset-id">ID:</label>
+                    <label className="label" htmlFor="asset-id">ID: </label>
                   </div>
                   <div className="field-body">
                     <div className="field detail-content">
@@ -45,7 +45,7 @@ class Transactions extends React.Component {
                 </div>
                 <div className="field is-horizontal">
                   <div className="field-label is-normal">
-                    <label className="label" htmlFor="asset-description">Description:</label>
+                    <label className="label" htmlFor="asset-description">Description: </label>
                   </div>
                   <div className="field-body">
                     <div className="field detail-content">

@@ -8,7 +8,7 @@ class EventBreadcrumb extends React.Component {
   }
 
   render() {
-    const events = this.state.events.map(event => <li key={event.id}><div>{event}</div></li>);
+    const events = this.state.events.map((event, index) => <li key={index}><div>{event}</div></li>);
     return (
       <nav className="breadcrumb has-succeeds-separator is-centered" aria-label="breadcrumbs">
         <ul>
