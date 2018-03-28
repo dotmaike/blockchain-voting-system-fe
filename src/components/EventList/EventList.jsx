@@ -26,8 +26,6 @@ class EventList extends React.Component {
   }
 
   render() {
-    const { showDetails } = this.state.showDetails;
-
     const events = this.state.events.map((event, index) =>
       (
         <li key={index}>
@@ -48,7 +46,7 @@ class EventList extends React.Component {
             {events}
           </ul>
         </section>
-        { showDetails ? <EventDetail event={this.state.eventData} handleClose={this.handleCloseDetails} /> : '' }
+        { this.state.showDetails ? <EventDetail event={this.state.eventData} handleClose={this.handleCloseDetails} /> : '' }
       </React.Fragment>
     );
   }
