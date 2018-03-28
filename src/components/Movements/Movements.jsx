@@ -3,7 +3,7 @@ import './styles.scss';
 
 import { getAsset } from './../../Utils/API';
 import Notification from './../Notification';
-import Register from './../Register';
+import Transactions from './../Transactions';
 
 class Movements extends React.Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class Movements extends React.Component {
           {this.state.assetInfo && (
             <div className="container">
               <hr />
-              <Register />
+              <Transactions data={this.state.assetInfo} />
             </div>
           )}
         </section>
