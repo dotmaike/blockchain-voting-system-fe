@@ -10,14 +10,14 @@ class EventList extends React.Component {
     this.state = {
       events: this.props.events,
       showDetails: false,
-      event: {}
+      eventData: {}
     };
   }
 
   handleDetails = (event) => {
     this.setState({
       showDetails: true,
-      event
+      eventData: event
     });
   }
 
@@ -28,14 +28,14 @@ class EventList extends React.Component {
   render() {
     const { showDetails } = this.state.showDetails;
 
-    const events = this.state.events.map(event =>
+    const events = this.state.events.map((event, index) =>
       (
-        <li key={event.id}>
+        <li key={index}>
           <div className="event-item box">
             <div>{event.summary}</div>
-            <button className="icon has-text-success icon-position" onClick={this.handleDetails.bind(this, event)} >
+            <div className="icon has-text-success icon-position" onClick={this.handleDetails.bind(this, event)} >
               <i className="fa fa-lg fa-info-circle" />
-            </button>
+            </div>
           </div>
         </li>
       ));
@@ -48,7 +48,7 @@ class EventList extends React.Component {
             {events}
           </ul>
         </section>
-        { showDetails ? <EventDetail event={this.state.event} handleClose={this.handleCloseDetails} /> : '' }
+        { showDetails ? <EventDetail event={this.state.eventData} handleClose={this.handleCloseDetails} /> : '' }
       </React.Fragment>
     );
   }
