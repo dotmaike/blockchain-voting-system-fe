@@ -3,6 +3,7 @@ import React from 'react';
 import './styles.scss';
 
 import EventDetail from './../EventDetail';
+import EventCreate from './../EventCreate';
 
 class EventList extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class EventList extends React.Component {
     this.state = {
       events: this.props.events,
       showDetails: false,
+      showAddEvent: false,
       eventData: {}
     };
   }
@@ -21,8 +23,16 @@ class EventList extends React.Component {
     });
   }
 
+  handleAddEvent = () => {
+    this.setState({ showAddEvent: true });
+  }
+
   handleCloseDetails = () => {
     this.setState({ showDetails: false });
+  }
+
+  handleCloseAddEvent = () => {
+    this.setState({ showAddEvent: false });
   }
 
   render() {
@@ -41,12 +51,18 @@ class EventList extends React.Component {
     return (
       <React.Fragment>
         <section className="events-container">
-          <span className="title"> Events: </span>
+          <div className="event-panel">
+            <div className="list-title"> Events: </div>
+            <div className="has-text-success add-button" onClick={this.handleAddEvent} >
+              <i className="fa fa-3x fa-plus-circle" />
+            </div>
+          </div>
           <ul className="event-list">
             {events}
           </ul>
         </section>
         { this.state.showDetails ? <EventDetail event={this.state.eventData} handleClose={this.handleCloseDetails} /> : '' }
+        { this.state.showAddEvent ? <EventCreate handleClose={this.handleCloseAddEvent} /> : '' }
       </React.Fragment>
     );
   }
