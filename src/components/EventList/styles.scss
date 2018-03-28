@@ -1,0 +1,15 @@
+.event-item {
+  margin: 20px 0px;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.icon-position {
+  position: absolute;
+  right: 5px;
+}
+
+.icon-position:hover{
+  cursor: pointer;
+}
