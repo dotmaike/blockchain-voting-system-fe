@@ -1,6 +1,8 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 
+import './styles.scss';
+
 const EventBreadcrumb = (props) => {
   const events = props.events.slice(Math.max(props.events.length - 5, 0)).map((event, index) => (
     <li key={index}>
