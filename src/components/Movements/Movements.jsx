@@ -28,6 +28,7 @@ class Movements extends React.Component {
   };
   updateEventList = (events) => {
     if (events) {
+      events = events.map((item, i) => ({ ...item, id: i }));
       this.setState(state => ({ data: { ...state.data, events } }));
     }
   };
