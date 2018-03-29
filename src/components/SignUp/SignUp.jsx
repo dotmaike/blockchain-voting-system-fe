@@ -12,7 +12,7 @@ class SignUp extends React.Component {
     super(props);
     this.state = {
       countries: [],
-      business: [{ name: 'Automotive' }, { name: 'Other' }],
+      business: [{ name: 'Real State' }, { name: 'IT Equipment' }],
       isAuthenticated:
         sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length
     };
