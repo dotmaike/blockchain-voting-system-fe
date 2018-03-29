@@ -5,68 +5,42 @@ import './styles.scss';
 import EventBreadcrumb from './../EventBreadcrumb';
 import EventList from './../EventList';
 
-class Transactions extends React.Component {
-  render() {
-    const eventSummaries = this.props.data.events.map(event => event.summary);
-
-    return (
-      <section className="hero is-white sub-container has-text-centered">
-        <div className="hero-head">
-          <h1 className="title is-size-4">Transactions</h1>
-          <div className="columns">
-            <div className="column">
-              <EventBreadcrumb events={eventSummaries} />
-            </div>
-          </div>
-        </div>
-        <div className="hero-body">
-          <div className="container">
-            <div className="columns">
-              <div className="column is-one-quarter">
-                <div className="title is-size-5">Asset tracking history</div>
-                <div>
-                  <figure className="image is-square">
-                    <img src={`data:image/jpeg;charset=utf-8;base64, ${this.props.data.events[0].encodedImage}`} alt="" />
-                  </figure>
-                </div>
-              </div>
-              <div className="column is-three-fifths">
-                <div className="field is-horizontal">
-                  <div className="field-label is-normal">
-                    <label className="label" htmlFor="asset-id">ID: </label>
-                  </div>
-                  <div className="field-body">
-                    <div className="field detail-content">
-                      <p className="control is-expanded has-icons-left">
-                        {this.props.data.uuid}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="field is-horizontal">
-                  <div className="field-label is-normal">
-                    <label className="label" htmlFor="asset-description">Description: </label>
-                  </div>
-                  <div className="field-body">
-                    <div className="field detail-content">
-                      <p className="control is-expanded has-icons-left">
-                        {this.props.data.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <EventList events={this.props.data.events} />
+const Transactions = (props) => {
+  const updateEventList = (events) => {
+    if (events) {
+      props.updateEventList(events);
+    }
+  };
+  return (
+    <React.Fragment>
+      <EventBreadcrumb events={props.data.events} />
+      <div className="tile is-ancestor transactions">
+        <div className="tile is-4 is-vertical is-parent">
+          <div className="tile is-child">
+            <div className="is-aligner">
+              <div className="image is-aligner-item">
+                <img src={`data:image/jpeg;charset=utf-8;base64, ${props.data.events[0].encodedImage}`} alt="" />
               </div>
             </div>
           </div>
         </div>
-      </section>
-    );
-  }
-}
+        <div className="tile is-parent">
+          <div className="tile is-child box">
+            <p className="title">Transactions</p>
+            <p>ID: {props.data.uuid}</p>
+            <p>Description: {props.data.description}</p>
+            <EventList updateEventList={updateEventList} showNotification={props.showNotification} {...props.data} />
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
 
 Transactions.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  showNotification: PropTypes.func.isRequired,
+  updateEventList: PropTypes.func.isRequired
 };
 
 export default Transactions;

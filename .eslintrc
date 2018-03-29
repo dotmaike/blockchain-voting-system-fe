@@ -30,9 +30,6 @@
     "react/no-danger": 0,
     "jsx-a11y/no-static-element-interactions": 0,
     "max-len": [1, 125, 2],
-    "react/jsx-no-bind": [ 1, {
-      "allowBind": true
-    }],
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
