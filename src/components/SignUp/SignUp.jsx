@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 import Footer from './../Footer';
@@ -11,7 +12,9 @@ class SignUp extends React.Component {
     super(props);
     this.state = {
       countries: [],
-      business: [{ name: 'Automotive' }, { name: 'Other' }]
+      business: [{ name: 'Automotive' }, { name: 'Other' }],
+      isAuthenticated:
+        sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length
     };
   }
   componentWillMount() {
@@ -27,6 +30,11 @@ class SignUp extends React.Component {
     this.setState({ image: num });
   };
   render() {
+    const { from } = this.props.location.state || { from: { pathname: this.state.isAuthenticated ? '/home' : '/' } };
+    if (this.state.isAuthenticated) {
+      return <Redirect to={from} />;
+    }
+
     return (
       <section>
         <nav className="navbar has-shadow">
@@ -242,4 +250,8 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+SignUp.propTypes = {
+  location: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
+};
+
+export default withRouter(SignUp);
