@@ -4,28 +4,20 @@ import Dropzone from 'react-dropzone';
 
 import './styles.scss';
 
+import { setAsset } from './../../Utils/API';
+
 class EventCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // form: {
-      //   ownerName:
-      //     sessionStorage.getItem('userInfo') && Object.keys(JSON.parse(sessionStorage.getItem('userInfo'))).length
-      //       ? JSON.parse(sessionStorage.getItem('userInfo')).username
-      //       : ''
-      // },
+      form: {},
       disabled: false,
-      // isActive: false,
-      // isSuccess: false,
-      // message: '',
-      // assetInfo: '',
       files: []
     };
   }
-
   dropFiles = (file) => {
     const files = this.state.files.concat(file);
-    this.setState(state => ({ form: { ...state.form, ...{ file: file[0] } }, files }));
+    this.setState(state => ({ form: { ...state.form, ...{ image: file[0] } }, files }));
   };
   showFiles = () =>
     this.state.files && (
@@ -39,16 +31,39 @@ class EventCreate extends React.Component {
         </ul>
       </div>
     );
-
   close = () => {
     this.props.handleClose();
-  }
-
+  };
   handleCancel = (e) => {
     e.preventDefault();
     this.props.handleClose();
-  }
-
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const data = this.state.form;
+    const formData = new FormData();
+    Object.keys(data).forEach((item) => {
+      formData.append(item, data[item]);
+    });
+    setAsset(formData, this.props.uuid)
+      .then((res) => {
+        this.setState({
+          form: {},
+          files: []
+        });
+        document.getElementById('event-form').reset();
+        this.props.showNotification({ data: res, type: 'update' });
+        this.props.handleClose(res.data.events);
+      })
+      .catch((error) => {
+        this.props.showNotification({ data: error.response.data });
+      });
+  };
+  handleChange = (event) => {
+    const { target } = event;
+    const { name, value } = target;
+    this.setState(state => ({ form: { ...state.form, ...{ [name]: value } } }));
+  };
   render() {
     return (
       <div className="modal is-active">
@@ -58,7 +73,7 @@ class EventCreate extends React.Component {
             <p className="modal-card-title is-uppercase">Add Event</p>
           </header>
           <section className="modal-card-body">
-            <form id="event-form" className="column is-10" onSubmit={this.handleSubmit}>
+            <form id="event-form" className="column is-12" onSubmit={this.handleSubmit}>
               <div className="columns">
                 <div className="column is-10 messages is-fullheight">
                   <div className="content">
@@ -72,7 +87,7 @@ class EventCreate extends React.Component {
                           name="summary"
                           id="event-summary"
                           type="text"
-                          placeholder="event Summary"
+                          placeholder="Summary"
                           maxLength="150"
                           onChange={this.handleChange}
                         />
@@ -99,7 +114,9 @@ class EventCreate extends React.Component {
                       <input type="submit" className="button is-primary" value="Submit" />
                     </p>
                     <p className="control">
-                      <button className="button is-light" onClick={this.handleCancel}>Cancel</button>
+                      <button className="button is-light" onClick={this.handleCancel}>
+                        Cancel
+                      </button>
                     </p>
                   </div>
                 </div>
@@ -108,7 +125,9 @@ class EventCreate extends React.Component {
                   <div className="content">
                     <div className="field is-centered">
                       <img
-                        src={this.state.files.length ? this.state.files[0].preview : 'https://placehold.it/288x288?text=Preview'}
+                        src={
+                          this.state.files.length ? this.state.files[0].preview : 'https://placehold.it/288x288?text=Preview'
+                        }
                         alt=""
                       />
                     </div>
@@ -117,8 +136,8 @@ class EventCreate extends React.Component {
                       <section>
                         <div className="dropzone">
                           <Dropzone
-                            id="file"
-                            name="file"
+                            id="image"
+                            name="image"
                             accept="image/*"
                             disabled={this.state.disabled}
                             onDrop={this.dropFiles}
@@ -147,7 +166,9 @@ class EventCreate extends React.Component {
 }
 
 EventCreate.propTypes = {
-  handleClose: PropTypes.func.isRequired
+  handleClose: PropTypes.func.isRequired,
+  uuid: PropTypes.string.isRequired,
+  showNotification: PropTypes.func.isRequired
 };
 
 export default EventCreate;

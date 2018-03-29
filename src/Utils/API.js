@@ -37,13 +37,13 @@ export function getAsset(assetId) {
   }).then(res => res);
 }
 
-export function setAsset(data) {
+export function setAsset(data, id) {
   if (!isAuthenticated) {
     return Promise.reject(new Error('reject'));
   }
   return API({
     method: 'post',
-    url: assetUrl,
+    url: id ? `${assetUrl + id}/event` : assetUrl,
     data,
     auth: {
       username: 'testUser',

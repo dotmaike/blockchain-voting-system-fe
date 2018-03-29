@@ -1,44 +1,40 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
 import { getAsset } from './../../Utils/API';
-import Notification from './../Notification';
 import Transactions from './../Transactions';
 
 class Movements extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isActive: false,
-      isSuccess: false,
-      message: '',
-      assetInfo: ''
+      data: ''
     };
   }
   handleClick = (event) => {
     event.preventDefault();
     getAsset(this.input.value)
       .then((res) => {
-        window.scrollTo(0, 0);
+        res.data.events = res.data.events.map((item, i) => ({ ...item, id: i }));
         this.setState({
-          assetInfo: res.data
+          data: res.data
         });
-        setTimeout(this.toogleActive, 5000);
       })
       .catch((error) => {
-        window.scrollTo(0, 0);
         console.log(error.response.data);
-        this.setState({ isActive: true, message: 'Asset not found. Please verify the ID.' });
-        setTimeout(this.toogleActive, 5000);
+        this.props.showNotification({ data: { message: 'Asset not found. Please verify the ID.' } });
       });
   };
-  toogleActive = () => {
-    this.setState({ isActive: false });
+  updateEventList = (events) => {
+    if (events) {
+      this.setState(state => ({ data: { ...state.data, events } }));
+    }
   };
   render() {
     return (
       <React.Fragment>
-        <section className="column is-10 aside hero is-fullheight movement-section">
+        <section className="column is-10 hero is-fullheight movement-section">
           <div className="container has-text-centered">
             <h1 className="title">Asset Tracking</h1>
             <div className="movement-form">
@@ -61,22 +57,24 @@ class Movements extends React.Component {
               </div>
             </div>
           </div>
-          {this.state.assetInfo && (
+          {this.state.data && (
             <div className="container">
               <hr />
-              <Transactions data={this.state.assetInfo} />
+              <Transactions
+                data={this.state.data}
+                showNotification={this.props.showNotification}
+                updateEventList={this.updateEventList}
+              />
             </div>
           )}
         </section>
-        <Notification
-          isActive={this.state.isActive}
-          message={this.state.message}
-          isSuccess={this.state.isSuccess}
-          toogleActive={this.toogleActive}
-        />
       </React.Fragment>
     );
   }
 }
+
+Movements.propTypes = {
+  showNotification: PropTypes.func.isRequired
+};
 
 export default Movements;

@@ -69,7 +69,7 @@ class Login extends React.Component {
                         className="input is-large"
                         type="text"
                         placeholder="User Name"
-                        onChange={e => this.onChange(e)}
+                        onChange={this.onChange}
                         value={this.state.username}
                       />
                     </div>
@@ -82,7 +82,7 @@ class Login extends React.Component {
                         className="input is-large"
                         type="password"
                         placeholder="Your Password"
-                        onChange={e => this.onChange(e)}
+                        onChange={this.onChange}
                         value={this.state.password}
                       />
                     </div>
