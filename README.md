@@ -179,7 +179,7 @@ After creation, your project should look like this:
 ├── LICENSE
 ├── README.md
 ├── package-lock.json
-├── package.json
+└── package.json
 ```
 
 For the project to build, **these files must exist with exact filenames**:
