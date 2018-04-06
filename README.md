@@ -128,21 +128,58 @@ We are always open to [your feedback](https://github.com/facebookincubator/creat
 
 After creation, your project should look like this:
 
-```
-my-app/
-  README.md
-  node_modules/
-  package.json
-  public/
-    index.html
-    favicon.ico
-  src/
-    App.css
-    App.js
-    App.test.js
-    index.css
-    index.js
-    logo.svg
+```bash
+├── config
+│   ├── /jest
+│   ├── env.js
+│   ├── paths.js
+│   ├── polyfills.js
+│   ├── webpack.config.dev.js
+│   ├── webpack.config.prod.js
+│   ├── webpackDevServer.config.js
+├── public
+│   ├── index.html
+│   ├── manifest.json
+│   ├── **/*.[jpg|png]
+│   ├── favicon.ico
+├── scripts
+│   ├── build.js
+│   ├── start.js
+│   ├── test.js
+├── src
+│   ├── Utils
+│   │   ├── API.js
+│   ├── components
+│   │   ├── App (Same structure for all the components)
+│   │   │   ├── **/*.[js|jsx]
+│   │   │   ├── **/styles.scss
+│   │   ├── DefaultLayout
+│   │   ├── EventBreadcrumb
+│   │   ├── EventCreate
+│   │   ├── EventDetail
+│   │   ├── EventList
+│   │   ├── Footer
+│   │   ├── Header
+│   │   ├── Home
+│   │   ├── Login
+│   │   ├── Movements
+│   │   ├── Notification
+│   │   ├── Register
+│   │   ├── Select
+│   │   ├── SideBar
+│   │   ├── SignUp
+│   │   ├── Transactions
+│   ├── index.js
+│   ├── registerServiceWorker.js
+├── .babelrc
+├── .editorconfig
+├── .eslintrc
+├── .gitattributes
+├── .gitignore
+├── LICENSE
+├── README.md
+├── package-lock.json
+├── package.json
 ```
 
 For the project to build, **these files must exist with exact filenames**:
