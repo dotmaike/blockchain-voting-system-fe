@@ -136,23 +136,23 @@ After creation, your project should look like this:
 │   ├── polyfills.js
 │   ├── webpack.config.dev.js
 │   ├── webpack.config.prod.js
-│   ├── webpackDevServer.config.js
+│   └── webpackDevServer.config.js
 ├── public
 │   ├── index.html
 │   ├── manifest.json
 │   ├── **/*.[jpg|png]
-│   ├── favicon.ico
+│   └── favicon.ico
 ├── scripts
 │   ├── build.js
 │   ├── start.js
-│   ├── test.js
+│   └── test.js
 ├── src
 │   ├── Utils
-│   │   ├── API.js
+│   │   └── API.js
 │   ├── components
 │   │   ├── App (Same structure for all the components)
 │   │   │   ├── **/*.[js|jsx]
-│   │   │   ├── styles.scss
+│   │   │   └── styles.scss
 │   │   ├── DefaultLayout
 │   │   ├── EventBreadcrumb
 │   │   ├── EventCreate
@@ -168,9 +168,9 @@ After creation, your project should look like this:
 │   │   ├── Select
 │   │   ├── SideBar
 │   │   ├── SignUp
-│   │   ├── Transactions
+│   │   └── Transactions
 │   ├── index.js
-│   ├── registerServiceWorker.js
+│   └── registerServiceWorker.js
 ├── .babelrc
 ├── .editorconfig
 ├── .eslintrc
