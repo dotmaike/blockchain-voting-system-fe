@@ -152,7 +152,7 @@ After creation, your project should look like this:
 │   ├── components
 │   │   ├── App (Same structure for all the components)
 │   │   │   ├── **/*.[js|jsx]
-│   │   │   ├── **/styles.scss
+│   │   │   ├── styles.scss
 │   │   ├── DefaultLayout
 │   │   ├── EventBreadcrumb
 │   │   ├── EventCreate
